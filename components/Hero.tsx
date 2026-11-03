@@ -29,7 +29,7 @@ export function Hero() {
         </p>
         <div className="mt-9 flex flex-wrap gap-3.5">
           <a href="#start" className="inline-flex items-center gap-2.5 rounded-[2px] bg-blood px-7 py-[15px] font-display text-sm font-semibold uppercase tracking-[0.12em] text-white transition-all hover:-translate-y-0.5 hover:bg-blood-bright">Request a quote ›</a>
-          <a href="#services" className="inline-flex items-center gap-2.5 rounded-[2px] border border-line px-7 py-[15px] font-display text-sm font-semibold uppercase tracking-[0.12em] text-bone transition-colors hover:border-blood">See finishes</a>
+          <a href="#ai-preview" className="inline-flex items-center gap-2.5 rounded-[2px] border border-line px-7 py-[15px] font-display text-sm font-semibold uppercase tracking-[0.12em] text-bone transition-colors hover:border-blood">Try the AI preview</a>
         </div>
         <div className="mt-14 flex flex-wrap gap-x-10 gap-y-6">
           {[["Cerakote", "Colors & patterns"], ["Hydro-dip", "Printed films"], ["Mail-in", "Or local drop-off"]].map(([num, lbl]) => (

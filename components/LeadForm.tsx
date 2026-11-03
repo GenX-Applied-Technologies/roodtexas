@@ -11,7 +11,7 @@ const inputCls =
 const labelCls = "text-[13px] font-medium text-ash";
 
 export function LeadForm({ guns = true }: { guns?: boolean }) {
-  const { platform, finish } = useBuild();
+  const { platform, finish, prefill, prefillVersion } = useBuild();
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
 
@@ -21,7 +21,8 @@ export function LeadForm({ guns = true }: { guns?: boolean }) {
     setError("");
     const form = e.currentTarget;
     const fd = new FormData(form);
-    const payload = Object.fromEntries(fd.entries());
+    const payload: Record<string, unknown> = Object.fromEntries(fd.entries());
+    if (prefill.image) payload.previewImage = prefill.image;
     try {
       const res = await fetch("/api/lead", {
         method: "POST",
@@ -58,7 +59,7 @@ export function LeadForm({ guns = true }: { guns?: boolean }) {
   }
 
   return (
-    <form onSubmit={onSubmit} className="max-w-[760px]">
+    <form key={prefillVersion} onSubmit={onSubmit} className="max-w-[760px]">
       {/* honeypot */}
       <input
         type="text"
@@ -71,15 +72,15 @@ export function LeadForm({ guns = true }: { guns?: boolean }) {
       <div className="grid gap-3.5 md:grid-cols-2">
         <div className="flex flex-col gap-1.5">
           <label className={labelCls}>Name</label>
-          <input name="name" required placeholder="First and last" className={inputCls} />
+          <input name="name" defaultValue={prefill.name} required placeholder="First and last" className={inputCls} />
         </div>
         <div className="flex flex-col gap-1.5">
           <label className={labelCls}>Email</label>
-          <input name="email" type="email" required placeholder="you@email.com" className={inputCls} />
+          <input name="email" type="email" defaultValue={prefill.email} required placeholder="you@email.com" className={inputCls} />
         </div>
         <div className="flex flex-col gap-1.5">
           <label className={labelCls}>Phone</label>
-          <input name="phone" placeholder="(806) 000-0000" className={inputCls} />
+          <input name="phone" defaultValue={prefill.phone} placeholder="(806) 000-0000" className={inputCls} />
         </div>
         <div className="flex flex-col gap-1.5">
           <label className={labelCls}>What do you want?</label>
@@ -91,30 +92,41 @@ export function LeadForm({ guns = true }: { guns?: boolean }) {
         </div>
         <div className="flex flex-col gap-1.5">
           <label className={labelCls}>{guns ? "Platform" : "Item"}</label>
-          <select name="platform" key={`p-${platform}`} defaultValue={guns ? platform : undefined} className={inputCls}>
-            {(guns ? [...PLATFORMS, "Parts only", "Other / not sure"] : ["Auto part", "Moto part", "Knife", "Tumbler / drinkware", "Tool", "Outdoor gear", "Other"]).map((o) => (
-              <option key={o}>{o}</option>
+          <input name="platform" list="rm-platforms" defaultValue={prefill.item ?? (guns ? platform : "")} placeholder={guns ? "e.g. Glock 19, AR-15" : "e.g. tumbler, valve cover"} className={inputCls} />
+          <datalist id="rm-platforms">
+            {(guns ? [...PLATFORMS, "Parts only"] : ["Auto part", "Moto part", "Knife", "Tumbler / drinkware", "Tool", "Outdoor gear"]).map((o) => (
+              <option key={o} value={o} />
             ))}
-          </select>
+          </datalist>
         </div>
         <div className="flex flex-col gap-1.5">
           <label className={labelCls}>Finish</label>
-          <select name="finish" key={`f-${finish}`} defaultValue={finish} className={inputCls}>
-            {[...FINISHES.map((f) => f.name), "Not sure yet"].map((o) => (
-              <option key={o}>{o}</option>
+          <input name="finish" list="rm-finishes" defaultValue={prefill.finish ?? (guns ? finish : "")} placeholder="Color or pattern, or not sure yet" className={inputCls} />
+          <datalist id="rm-finishes">
+            {FINISHES.map((f) => (
+              <option key={f.name} value={f.name} />
             ))}
-          </select>
+          </datalist>
         </div>
         <div className="flex flex-col gap-1.5 md:col-span-2">
           <label className={labelCls}>Anything else</label>
           <textarea
             name="notes"
+            defaultValue={prefill.notes}
             rows={3}
             placeholder={guns ? "Tell us about the piece, the colors or pattern you want, and your timeline." : "Tell us about the item, the colors or pattern you want, and your timeline."}
             className={inputCls}
           />
         </div>
       </div>
+
+      {prefill.image && (
+        <div className="mt-4 flex items-center gap-3 text-sm text-ash">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={prefill.image} alt="Chosen AI preview" className="h-16 w-24 rounded-sm border border-line object-cover" />
+          Your chosen AI preview will be attached.
+        </div>
+      )}
 
       {status === "error" && <p className="mt-3 text-sm text-blood-bright">{error}</p>}
 

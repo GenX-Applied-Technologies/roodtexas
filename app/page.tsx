@@ -9,6 +9,8 @@ import { Gallery } from "@/components/Gallery";
 import { More } from "@/components/More";
 import { About } from "@/components/About";
 import { Start } from "@/components/Start";
+import { AiPreview } from "@/components/AiPreview";
+import { ChatBubble } from "@/components/ChatBubble";
 import { Footer } from "@/components/Footer";
 import { BuildProvider } from "@/components/BuildProvider";
 
@@ -20,6 +22,7 @@ export default function Home() {
         <Hero />
         <Ticker />
         <Services />
+        <AiPreview />
         <How />
         <Colorways />
         <Visualizer />
@@ -29,6 +32,7 @@ export default function Home() {
         <Start />
       </main>
       <Footer />
+      <ChatBubble />
     </BuildProvider>
   );
 }

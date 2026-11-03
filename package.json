@@ -11,11 +11,14 @@
     "postinstall": "prisma generate"
   },
   "dependencies": {
+    "@ai-sdk/google": "^4.0.111",
     "@prisma/client": "^6.3.1",
+    "ai": "^7.0.162",
     "next": "^15.5.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "resend": "^4.1.2",
+    "sharp": "^0.34.5",
     "zod": "^3.24.1"
   },
   "devDependencies": {

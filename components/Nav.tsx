@@ -7,7 +7,7 @@ import { IMG } from "@/lib/brandimg";
 const LINKS = [
   { href: "/#services", label: "Cerakote & hydro-dip" },
   { href: "/#how", label: "Mail-in / drop-off" },
-  { href: "/#visualizer", label: "Visualizer" },
+  { href: "/#ai-preview", label: "AI preview" },
   { href: "/#gallery", label: "Gallery" },
   { href: "/#more", label: "Beyond guns" },
   { href: "/#about", label: "About" },

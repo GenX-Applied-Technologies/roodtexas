@@ -27,3 +27,14 @@ model Lead {
   @@index([email])
   @@index([createdAt])
 }
+
+model AiUsage {
+  id        String   @id @default(cuid())
+  kind      String // preview | chat
+  visitor   String // hashed IP
+  cost      Float
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([kind, visitor, createdAt])
+}

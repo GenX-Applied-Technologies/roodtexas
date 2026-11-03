@@ -13,6 +13,7 @@ const LeadSchema = z.object({
   notes: z.string().trim().max(2000).optional().or(z.literal("")),
   // Honeypot — must stay empty. Bots fill it.
   company: z.string().max(0).optional(),
+  previewImage: z.string().max(400_000).regex(/^data:image\/(jpeg|png|webp);base64,/).optional(),
 });
 
 function clean(v?: string | null) {
@@ -94,7 +95,11 @@ export async function POST(req: NextRequest) {
           "",
           "Notes:",
           data.notes ?? "-",
+          parsed.data.previewImage ? "\n(AI finish preview attached)" : "",
         ].join("\n"),
+        attachments: parsed.data.previewImage
+          ? [{ filename: "ai-preview." + (parsed.data.previewImage.slice(11, 15).replace(/;.*/, "") || "jpg"), content: parsed.data.previewImage.split(",")[1] }]
+          : undefined,
       });
       results.email = "sent";
     } catch (err) {
