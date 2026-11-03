@@ -5,9 +5,9 @@ import { COLORWAYS } from "@/lib/content";
 export function Colorways() {
   return (
     <Section id="colorways">
-      <SectionHead eyebrow="Launch lineup" title="Three signature colorways">
-        We launch with three, not eight. Each one earns its spot. Drops are where we test the experiments
-        before anything becomes permanent.
+      <SectionHead eyebrow="Color ideas" title="Start with a house color">
+        A few starting points. Bring your own color, match a truck, or mix a pattern. If you can describe it,
+        we can quote it.
       </SectionHead>
 
       <div className="grid gap-5 md:grid-cols-3">
@@ -23,7 +23,7 @@ export function Colorways() {
                 <h3 className="mb-1.5 mt-2 text-[22px]">{c.name}</h3>
                 <p className="text-sm text-ash">{c.blurb}</p>
                 <span className="mt-3.5 inline-block rounded-[2px] border border-blood/40 px-2.5 py-1 font-display text-[11px] uppercase tracking-[0.14em] text-blood">
-                  {c.badge}
+                  Example
                 </span>
               </div>
             </div>

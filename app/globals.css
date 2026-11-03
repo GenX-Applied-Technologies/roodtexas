@@ -1,14 +1,14 @@
 @import "tailwindcss";
 
 @theme {
-  --color-ink: #0a0a0b;
+  --color-ink: #0b0909;
   --color-panel: #121214;
   --color-panel-2: #18181b;
   --color-line: #262629;
-  --color-blood: #d11f2a;
+  --color-blood: #c8141c;
   --color-blood-bright: #ef2733;
   --color-bone: #f5f5f3;
-  --color-ash: #9a9a9e;
+  --color-ash: #a3a2a0;
   --color-ash-dim: #6d6d72;
 
   --font-display: var(--font-oswald);
@@ -80,4 +80,17 @@
 @media (prefers-reduced-motion: reduce) {
   .reveal { opacity: 1; transform: none; transition: none; }
   html { scroll-behavior: auto; }
+}
+
+.aztec-band {
+  height: 14px;
+  background:
+    linear-gradient(135deg, transparent 33%, var(--color-blood) 33% 45%, transparent 45%) 0 0/28px 14px,
+    linear-gradient(45deg, transparent 33%, #8d8f93 33% 45%, transparent 45%) 14px 0/28px 14px,
+    var(--color-ink);
+  opacity: .9;
+}
+.stone-text {
+  background: linear-gradient(180deg,#f3f3f1 0%,#b8b9bb 45%,#7d7f83 55%,#e4e4e2 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
 }

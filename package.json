@@ -1,8 +1,8 @@
 {
-  "name": "roodtexas",
+  "name": "redmouthco",
   "version": "1.0.0",
   "private": true,
-  "description": "ROOD Manufacturing — AR-15 parts, custom firearm finishes, limited drops. Lubbock, TX.",
+  "description": "Red Mouth Co. — custom Cerakote & hydro-dip finishes. Lubbock, TX.",
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",

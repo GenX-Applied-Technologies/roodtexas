@@ -1,4 +1,4 @@
-// ROOD Manufacturing — data model
+// Red Mouth Co. — data model
 // Leads from the site (finish orders, drop reservations, parts questions).
 
 generator client {

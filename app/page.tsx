@@ -1,13 +1,13 @@
 import { Nav } from "@/components/Nav";
 import { Hero } from "@/components/Hero";
 import { Ticker } from "@/components/Ticker";
-import { TwoDoors } from "@/components/TwoDoors";
-import { Shop } from "@/components/Shop";
-import { Finishes } from "@/components/Finishes";
+import { Services } from "@/components/Services";
+import { How } from "@/components/How";
 import { Colorways } from "@/components/Colorways";
-import { Drops } from "@/components/Drops";
 import { Visualizer } from "@/components/Visualizer";
-import { Bench } from "@/components/Bench";
+import { Gallery } from "@/components/Gallery";
+import { More } from "@/components/More";
+import { About } from "@/components/About";
 import { Start } from "@/components/Start";
 import { Footer } from "@/components/Footer";
 import { BuildProvider } from "@/components/BuildProvider";
@@ -19,13 +19,13 @@ export default function Home() {
       <main>
         <Hero />
         <Ticker />
-        <TwoDoors />
-        <Shop />
-        <Finishes />
+        <Services />
+        <How />
         <Colorways />
-        <Drops />
         <Visualizer />
-        <Bench />
+        <Gallery />
+        <More />
+        <About />
         <Start />
       </main>
       <Footer />

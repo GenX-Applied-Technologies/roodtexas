@@ -72,18 +72,18 @@ export async function POST(req: NextRequest) {
   }
 
   // 2) Notify by email if Resend is configured.
-  if (process.env.RESEND_API_KEY) {
+  if (process.env.RESEND_API_KEY && process.env.LEAD_NOTIFY_TO) {
     try {
       const { Resend } = await import("resend");
       const resend = new Resend(process.env.RESEND_API_KEY);
-      const to = process.env.LEAD_NOTIFY_TO || "happyvwdude@gmail.com";
-      const from = process.env.LEAD_NOTIFY_FROM || "ROOD Manufacturing <onboarding@resend.dev>";
+      const to = process.env.LEAD_NOTIFY_TO as string;
+      const from = process.env.LEAD_NOTIFY_FROM || "Red Mouth Co. <onboarding@resend.dev>";
 
       await resend.emails.send({
         from,
         to,
         replyTo: data.email,
-        subject: `New ROOD lead — ${data.intent}${data.finish ? ` (${data.finish})` : ""}`,
+        subject: `New Red Mouth lead — ${data.intent}${data.finish ? ` (${data.finish})` : ""}`,
         text: [
           `Name:     ${data.name}`,
           `Email:    ${data.email}`,

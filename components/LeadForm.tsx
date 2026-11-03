@@ -10,7 +10,7 @@ const inputCls =
   "rounded-[3px] border border-line bg-ink px-3.5 py-[13px] text-[15px] text-bone transition-colors placeholder:text-ash-dim focus:border-blood focus:outline-none";
 const labelCls = "text-[13px] font-medium text-ash";
 
-export function LeadForm() {
+export function LeadForm({ guns = true }: { guns?: boolean }) {
   const { platform, finish } = useBuild();
   const [status, setStatus] = useState<Status>("idle");
   const [error, setError] = useState("");
@@ -45,8 +45,7 @@ export function LeadForm() {
       <div className="max-w-[760px] rounded-md border border-blood/50 bg-blood/[0.06] p-7">
         <h3 className="mb-2 font-display text-[22px] uppercase">Got it.</h3>
         <p className="text-ash">
-          Your request is in. We will reach out with the right next step within one business day. Compliance
-          review happens before any firearm changes hands.
+          Your request is in. We will reach out with the right next step with a quote and next steps.
         </p>
         <button
           onClick={() => setStatus("idle")}
@@ -80,20 +79,20 @@ export function LeadForm() {
         </div>
         <div className="flex flex-col gap-1.5">
           <label className={labelCls}>Phone</label>
-          <input name="phone" placeholder="(806) 555-0100" className={inputCls} />
+          <input name="phone" placeholder="(806) 000-0000" className={inputCls} />
         </div>
         <div className="flex flex-col gap-1.5">
           <label className={labelCls}>What do you want?</label>
-          <select name="intent" defaultValue={INTENTS[0]} className={inputCls}>
-            {INTENTS.map((o) => (
+          <select name="intent" defaultValue={guns ? INTENTS[0] : "Knife / tumbler / parts / gear"} className={inputCls}>
+            {(guns ? INTENTS : INTENTS.filter((i) => !/rifle|mail-in finish/i.test(i))).map((o) => (
               <option key={o}>{o}</option>
             ))}
           </select>
         </div>
         <div className="flex flex-col gap-1.5">
-          <label className={labelCls}>Platform</label>
-          <select name="platform" key={`p-${platform}`} defaultValue={platform} className={inputCls}>
-            {[...PLATFORMS, "Other / not sure"].map((o) => (
+          <label className={labelCls}>{guns ? "Platform" : "Item"}</label>
+          <select name="platform" key={`p-${platform}`} defaultValue={guns ? platform : undefined} className={inputCls}>
+            {(guns ? [...PLATFORMS, "Parts only", "Other / not sure"] : ["Auto part", "Moto part", "Knife", "Tumbler / drinkware", "Tool", "Outdoor gear", "Other"]).map((o) => (
               <option key={o}>{o}</option>
             ))}
           </select>
@@ -111,7 +110,7 @@ export function LeadForm() {
           <textarea
             name="notes"
             rows={3}
-            placeholder="Tell us about the firearm, the look you want, or your timeline."
+            placeholder={guns ? "Tell us about the piece, the colors or pattern you want, and your timeline." : "Tell us about the item, the colors or pattern you want, and your timeline."}
             className={inputCls}
           />
         </div>
